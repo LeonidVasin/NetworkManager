@@ -107,38 +107,38 @@ extension Response {
 
 extension NetworkManager {
     
-    @discardableResult public class func simpleRequest<T: MappableModel>(_ url: String, method: HTTPMethod = .get, getParameters: [String: Any?]? = nil, parameters: [String: Any]? = nil, postDataType: POSTDataType? = nil, httpHeaderFields: [String: String]? = nil, httpBody: Data? = nil, mapArrayPath: String? = nil, complete: (([T]?, ResponseError?) -> Void)? = nil) -> NetworkRequest? {
-        return NetworkManager.default.request(url, method: method, getParameters: getParameters, parameters: parameters, postDataType: postDataType, httpHeaderFields: httpHeaderFields, httpBody: httpBody) { respose in
+    @discardableResult public class func simpleRequest<T: MappableModel>(_ url: String, method: HTTPMethod = .get, getParameters: [String: Any?]? = nil, parameters: [String: Any]? = nil, postDataType: POSTDataType? = nil, httpHeaderFields: [String: String]? = nil, httpBody: Data? = nil, mapArrayPath: String? = nil, encoding: ParameterEncoding = URLEncoding.default, complete: (([T]?, ResponseError?) -> Void)? = nil) -> NetworkRequest? {
+        return NetworkManager.default.request(url, method: method, getParameters: getParameters, parameters: parameters, postDataType: postDataType, httpHeaderFields: httpHeaderFields, httpBody: httpBody, encoding: encoding) { respose in
             complete?(respose.mapArray(path: mapArrayPath), respose.error)
         }
     }
     
-    @discardableResult public class func simpleRequest<T: MappableModel>(_ url: String, method: HTTPMethod = .get, getParameters: [String: Any?]? = nil, parameters: [String: Any]? = nil, postDataType: POSTDataType? = nil, httpHeaderFields: [String: String]? = nil, httpBody: Data? = nil, complete: ((T?, ResponseError?) -> Void)? = nil) -> NetworkRequest? {
-        return NetworkManager.default.request(url, method: method, getParameters: getParameters, parameters: parameters, postDataType: postDataType, httpHeaderFields: httpHeaderFields, httpBody: httpBody) { respose in
+    @discardableResult public class func simpleRequest<T: MappableModel>(_ url: String, method: HTTPMethod = .get, getParameters: [String: Any?]? = nil, parameters: [String: Any]? = nil, postDataType: POSTDataType? = nil, httpHeaderFields: [String: String]? = nil, httpBody: Data? = nil, encoding: ParameterEncoding = URLEncoding.default, complete: ((T?, ResponseError?) -> Void)? = nil) -> NetworkRequest? {
+        return NetworkManager.default.request(url, method: method, getParameters: getParameters, parameters: parameters, postDataType: postDataType, httpHeaderFields: httpHeaderFields, httpBody: httpBody, encoding: encoding) { respose in
             complete?(respose.map(), respose.error)
         }
     }
     
-    @discardableResult public class func simpleRequest(_ url: String, method: HTTPMethod = .get, getParameters: [String: Any?]? = nil, parameters: [String: Any]? = nil, postDataType: POSTDataType? = nil, httpHeaderFields: [String: String]? = nil, httpBody: Data? = nil, complete: ((ResponseError?) -> Void)? = nil) -> NetworkRequest? {
-        return NetworkManager.default.request(url, method: method, getParameters: getParameters, parameters: parameters, postDataType: postDataType, httpHeaderFields: httpHeaderFields, httpBody: httpBody) { respose in
+    @discardableResult public class func simpleRequest(_ url: String, method: HTTPMethod = .get, getParameters: [String: Any?]? = nil, parameters: [String: Any]? = nil, postDataType: POSTDataType? = nil, httpHeaderFields: [String: String]? = nil, httpBody: Data? = nil, encoding: ParameterEncoding = URLEncoding.default, complete: ((ResponseError?) -> Void)? = nil) -> NetworkRequest? {
+        return NetworkManager.default.request(url, method: method, getParameters: getParameters, parameters: parameters, postDataType: postDataType, httpHeaderFields: httpHeaderFields, httpBody: httpBody, encoding: encoding) { respose in
             complete?(respose.error)
         }
     }
     
-    @discardableResult public class func simpleRequest<T: MappableModel>(_ url: URL, method: HTTPMethod = .get, getParameters: [String: Any?]? = nil, parameters: [String: Any]? = nil, postDataType: POSTDataType? = nil, httpHeaderFields: [String: String]? = nil, httpBody: Data? = nil, mapArrayPath: String? = nil, complete: (([T]?, ResponseError?) -> Void)? = nil) -> NetworkRequest? {
-        return NetworkManager.default.request(url.absoluteString, method: method, getParameters: getParameters, parameters: parameters, postDataType: postDataType, httpHeaderFields: httpHeaderFields, httpBody: httpBody) { respose in
+    @discardableResult public class func simpleRequest<T: MappableModel>(_ url: URL, method: HTTPMethod = .get, getParameters: [String: Any?]? = nil, parameters: [String: Any]? = nil, postDataType: POSTDataType? = nil, httpHeaderFields: [String: String]? = nil, httpBody: Data? = nil, mapArrayPath: String? = nil, encoding: ParameterEncoding = URLEncoding.default, complete: (([T]?, ResponseError?) -> Void)? = nil) -> NetworkRequest? {
+        return NetworkManager.default.request(url.absoluteString, method: method, getParameters: getParameters, parameters: parameters, postDataType: postDataType, httpHeaderFields: httpHeaderFields, httpBody: httpBody, encoding: encoding) { respose in
             complete?(respose.mapArray(path: mapArrayPath), respose.error)
         }
     }
     
-    @discardableResult public class func simpleRequest<T: MappableModel>(_ url: URL, method: HTTPMethod = .get, getParameters: [String: Any?]? = nil, parameters: [String: Any]? = nil, postDataType: POSTDataType? = nil, httpHeaderFields: [String: String]? = nil, httpBody: Data? = nil, complete: ((T?, ResponseError?) -> Void)? = nil) -> NetworkRequest? {
-        return NetworkManager.default.request(url.absoluteString, method: method, getParameters: getParameters, parameters: parameters, postDataType: postDataType, httpHeaderFields: httpHeaderFields, httpBody: httpBody) { respose in
+    @discardableResult public class func simpleRequest<T: MappableModel>(_ url: URL, method: HTTPMethod = .get, getParameters: [String: Any?]? = nil, parameters: [String: Any]? = nil, postDataType: POSTDataType? = nil, httpHeaderFields: [String: String]? = nil, httpBody: Data? = nil, encoding: ParameterEncoding = URLEncoding.default, complete: ((T?, ResponseError?) -> Void)? = nil) -> NetworkRequest? {
+        return NetworkManager.default.request(url.absoluteString, method: method, getParameters: getParameters, parameters: parameters, postDataType: postDataType, httpHeaderFields: httpHeaderFields, httpBody: httpBody, encoding: encoding) { respose in
             complete?(respose.map(), respose.error)
         }
     }
     
-    @discardableResult public class func simpleRequest(_ url: URL, method: HTTPMethod = .get, getParameters: [String: Any?]? = nil, parameters: [String: Any]? = nil, postDataType: POSTDataType? = nil, httpHeaderFields: [String: String]? = nil, httpBody: Data? = nil, complete: ((ResponseError?) -> Void)? = nil) -> NetworkRequest? {
-        return NetworkManager.default.request(url.absoluteString, method: method, getParameters: getParameters, parameters: parameters, postDataType: postDataType, httpHeaderFields: httpHeaderFields, httpBody: httpBody) { respose in
+    @discardableResult public class func simpleRequest(_ url: URL, method: HTTPMethod = .get, getParameters: [String: Any?]? = nil, parameters: [String: Any]? = nil, postDataType: POSTDataType? = nil, httpHeaderFields: [String: String]? = nil, httpBody: Data? = nil, encoding: ParameterEncoding = URLEncoding.default, complete: ((ResponseError?) -> Void)? = nil) -> NetworkRequest? {
+        return NetworkManager.default.request(url.absoluteString, method: method, getParameters: getParameters, parameters: parameters, postDataType: postDataType, httpHeaderFields: httpHeaderFields, httpBody: httpBody, encoding: encoding) { respose in
             complete?(respose.error)
         }
     }
